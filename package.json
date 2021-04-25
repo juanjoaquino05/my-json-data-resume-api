@@ -28,6 +28,7 @@
   "homepage": "https://github.com/juanjoaquino05/my-json-data-resume-api#readme",
   "dependencies": {
     "etag": "^1.8.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0"
   }
 }

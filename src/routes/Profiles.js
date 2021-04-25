@@ -1,12 +1,18 @@
 const etag = require('etag');
 let express = require('express')
 let {validateRequiredParams} = require('../libraries/Validator')
+const basicAuth = require('express-basic-auth')
 
 let profiles = express.Router()
 
 profiles.get('/', (request, response) => {
     return response.json(Resume.basics.profiles)
 });
+
+profiles.use(basicAuth({
+    users: { 'admin': 'supersecret' }
+}))
+
 
 profiles.put('/:network', (request, response) => {
     if(!request.headers['if-match'])
@@ -70,7 +76,7 @@ profiles.patch('/:network', (request, response) => {
     if(request.headers['if-match'] !== cachedEtag){
         return response.status(409).send()
     }
-    
+
     if(!validateRequiredParams(request.body, ['network', 'username', 'url'], false)) 
         return response.status(500).json({message: "Param missing! "})
 
