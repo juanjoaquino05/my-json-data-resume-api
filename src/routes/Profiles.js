@@ -10,9 +10,8 @@ profiles.get('/', (request, response) => {
 });
 
 profiles.use(basicAuth({
-    users: { 'admin': 'supersecret' }
+    users: Users
 }))
-
 
 profiles.put('/:network', (request, response) => {
     if(!request.headers['if-match'])
@@ -23,6 +22,9 @@ profiles.put('/:network', (request, response) => {
     if(request.headers['if-match'] !== cachedEtag){
         return response.status(409).send()
     }
+
+    if(!validateRequiredParams(request.body, ['network', 'username', 'url'], true)) 
+        return response.status(500).json({message: "Param missing! "})
     
     let profile = {
         network: request.params.network,

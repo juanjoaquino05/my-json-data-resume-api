@@ -1,10 +1,11 @@
-let express = require('express')
+let express = require('express');
 let app = express()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('etag', 'strong')
 
+Users = require('./models/Creds');
 Resume = require('./models/Resume')
 
 app.get('/', (request, response) => {
