@@ -19,6 +19,9 @@ app.use('/education', require('./routes/Educations').educations)
 app.use('/award', require('./routes/Awards').awards)
 app.use('/publication', require('./routes/Publications').publications)
 app.use('/skill', require('./routes/Skills').skills)
+app.use('/language', require('./routes/Languages').languages)
+app.use('/interest', require('./routes/Interests').interests)
+app.use('/reference', require('./routes/References').references)
 
 app.listen(5001, '0.0.0.0', () => {
     console.log("inicie correctamente")
