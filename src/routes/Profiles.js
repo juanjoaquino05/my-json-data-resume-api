@@ -53,7 +53,6 @@ profiles.post('/', (request, response) => {
 });
 
 profiles.patch('/:network', (request, response) => {
-    console.log(request.params);
     if(!validateRequiredParams(request.body, ['network', 'username', 'url'], false)) 
         return response.status(500).json({message: "Param missing! "})
 
@@ -68,10 +67,30 @@ profiles.patch('/:network', (request, response) => {
         if(element.network.toLowerCase() === request.params.network.toLowerCase()) {
             if(request.body.username) Resume.basics.profiles[index].username = request.body.username
             if(request.body.url) Resume.basics.profiles[index].url = request.body.url
+            if(request.body.network) Resume.basics.profiles[index].network = request.body.network
         }
     });
 
     return response.status(200).json(Resume.basics.profiles)
+});
+
+profiles.delete('/:network', (request, response) => {
+    let elementExist = Resume.basics.profiles.some((element) =>{
+        return element.network.toLowerCase() === request.params.network.toLowerCase()
+    })
+
+    if(!elementExist) return response.status(404).json({message: "Profile doesnt exist! "})
+    
+    let deletedProfile
+    Resume.basics.profiles.forEach((element, index) => {
+        if(element.network.toLowerCase() === request.params.network.toLowerCase()) {
+            deletedProfile = Resume.basics.profiles[index]
+
+            Resume.basics.profiles.splice(index, 1);
+        }
+    });
+
+    return response.status(200).json(deletedProfile)
 });
 
 module.exports.profiles = profiles
