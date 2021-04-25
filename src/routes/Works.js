@@ -29,7 +29,7 @@ works.put('/:company', (request, response) => {
         return response.status(500).json({message: "Param missing! "})
     
     let work = {
-        company: request.params.company,
+        company: request.body.company,
         position: request.body.position,
         website: request.body.website,
         startDate: request.body.startDate,

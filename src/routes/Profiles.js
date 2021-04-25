@@ -27,7 +27,7 @@ profiles.put('/:network', (request, response) => {
         return response.status(500).json({message: "Param missing! "})
     
     let profile = {
-        network: request.params.network,
+        network: request.body.network,
         username: request.body.username,
         url: request.body.url
     }

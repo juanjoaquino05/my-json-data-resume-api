@@ -28,7 +28,7 @@ awards.put('/:title', (request, response) => {
         return response.status(500).json({message: "Param missing! "})
     
     let award = {
-        title: request.params.title,
+        title: request.body.title,
         date: request.body.date,
         awarder: request.body.awarder,
         summary: request.body.summary,

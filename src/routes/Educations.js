@@ -28,7 +28,7 @@ educations.put('/:institution', (request, response) => {
         return response.status(500).json({message: "Param missing! "})
     
     let work = {
-        institution: request.params.institution,
+        institution: request.body.institution,
         area: request.body.area,
         studyType: request.body.studyType,
         startDate: request.body.startDate,

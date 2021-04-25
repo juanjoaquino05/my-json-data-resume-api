@@ -29,7 +29,7 @@ volunteers.put('/:organization', (request, response) => {
         return response.status(500).json({message: "Param missing! "})
     
     let volunteer = {
-        organization: request.params.organization,
+        organization: request.body.organization,
         position: request.body.position,
         website: request.body.website,
         startDate: request.body.startDate,
