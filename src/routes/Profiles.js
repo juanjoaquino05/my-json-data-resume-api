@@ -65,9 +65,10 @@ profiles.patch('/:network', (request, response) => {
     
     Resume.basics.profiles.forEach((element, index) => {
         if(element.network.toLowerCase() === request.params.network.toLowerCase()) {
-            if(request.body.username) Resume.basics.profiles[index].username = request.body.username
-            if(request.body.url) Resume.basics.profiles[index].url = request.body.url
-            if(request.body.network) Resume.basics.profiles[index].network = request.body.network
+            Object.assign(Resume.basics.profiles[index], request.body);
+            // if(request.body.username) Resume.basics.profiles[index].username = request.body.username
+            // if(request.body.url) Resume.basics.profiles[index].url = request.body.url
+            // if(request.body.network) Resume.basics.profiles[index].network = request.body.network
         }
     });
 
