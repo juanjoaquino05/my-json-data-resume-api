@@ -1,15 +1,18 @@
 const validateRequiredParams = function (body, params, all) {
     if(all){
-        let exists = true
+        let validation = true
         params.forEach(element => {
-            exists = exists && body.hasOwnProperty(element)
+            validation = validation && body.hasOwnProperty(element)
         })
 
-        return exists
+        return validation
     }else{
+        
+        let validation = true
         params.forEach(element => {
-            if(body.hasOwnProperty(element)) return true
+            validation = validation || body.hasOwnProperty(element)
         })
+        return validation
     }
 }
 

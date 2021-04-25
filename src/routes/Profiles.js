@@ -54,6 +54,8 @@ profiles.post('/', (request, response) => {
 
 profiles.patch('/:network', (request, response) => {
     console.log(request.params);
+    if(!validateRequiredParams(request.body, ['network', 'username', 'url'], false)) 
+        return response.status(500).json({message: "Param missing! "})
 
     let elementExist = Resume.basics.profiles.some((element) =>{
         return element.network.toLowerCase() === request.params.network.toLowerCase()
