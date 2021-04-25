@@ -1,3 +1,4 @@
+const etag = require('etag');
 let express = require('express')
 let {validateRequiredParams} = require('../libraries/Validator')
 
@@ -8,7 +9,15 @@ profiles.get('/', (request, response) => {
 });
 
 profiles.put('/:network', (request, response) => {
-    console.log(request.params);
+    if(!request.headers['if-match'])
+        return response.status(400).send()
+        
+    let cachedEtag = etag(JSON.stringify(Resume.basics.profiles))
+    
+    if(request.headers['if-match'] !== cachedEtag){
+        return response.status(409).send()
+    }
+    
     let profile = {
         network: request.params.network,
         username: request.body.username,
@@ -53,6 +62,15 @@ profiles.post('/', (request, response) => {
 });
 
 profiles.patch('/:network', (request, response) => {
+    if(!request.headers['if-match'])
+        return response.status(400).send()
+        
+    let cachedEtag = etag(JSON.stringify(Resume.basics.profiles))
+    
+    if(request.headers['if-match'] !== cachedEtag){
+        return response.status(409).send()
+    }
+    
     if(!validateRequiredParams(request.body, ['network', 'username', 'url'], false)) 
         return response.status(500).json({message: "Param missing! "})
 
