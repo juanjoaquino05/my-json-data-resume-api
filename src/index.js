@@ -1,10 +1,17 @@
 let express = require('express')
 let app = express()
 
-let Resume = require('./models/Resume')
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+Resume = require('./models/Resume')
 
 app.get('/', (request, response) => {
-    response.json(Resume);
+    response.json(Resume)
 })
 
-app.listen(5001)
+app.use('/basics', require('./routes/Basics').basics)
+
+app.listen(5001, '0.0.0.0', () => {
+    console.log("inicie correctamente")
+})
