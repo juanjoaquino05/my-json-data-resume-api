@@ -14,6 +14,7 @@ app.get('/', (request, response) => {
 
 app.use('/basics', require('./routes/Basics').basics)
 app.use('/work', require('./routes/Works').works)
+app.use('/volunteer', require('./routes/Volunteers').volunteers)
 
 app.listen(5001, '0.0.0.0', () => {
     console.log("inicie correctamente")
