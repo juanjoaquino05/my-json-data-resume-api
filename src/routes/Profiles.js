@@ -48,7 +48,6 @@ profiles.put('/:network', (request, response) => {
 });
 
 profiles.post('/', (request, response) => {
-    console.log(request.body)
     if(!validateRequiredParams(request.body, ['network', 'username', 'url'], true)) 
         return response.status(500).json({message: "Param missing! "})
 

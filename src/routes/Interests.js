@@ -33,9 +33,6 @@ interests.put('/:name', (request, response) => {
     }
 
     let elementExist = Resume.interests.some((element) =>{
-        console.log(element.name.toLowerCase())
-        console.log(element.name.toLowerCase())
-        
         return element.name.toLowerCase() === request.params.name.toLowerCase()
     })
 

@@ -5,7 +5,6 @@ let {validateRequiredParams} = require('../libraries/Validator')
 const basicAuth = require('express-basic-auth')
 
 basics.get('/', (request, response) => {
-    console.log(Resume)
     return response.json(Resume.basics)
 });
 

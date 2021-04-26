@@ -33,9 +33,6 @@ languages.put('/:language', (request, response) => {
     }
 
     let elementExist = Resume.languages.some((element) =>{
-        console.log(element.language.toLowerCase())
-        console.log(element.language.toLowerCase())
-        
         return element.language.toLowerCase() === request.params.language.toLowerCase()
     })
 

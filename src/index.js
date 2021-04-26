@@ -1,3 +1,8 @@
+// Getting args
+const args = require('minimist')(process.argv.slice(2))
+const PORT = args.p || process.env.PORT || '5001'
+
+// Importing 
 let express = require('express');
 let app = express()
 
@@ -8,6 +13,7 @@ app.set('etag', 'strong')
 Users = require('./models/Creds');
 Resume = require('./models/Resume')
 
+// Routes
 app.get('/', (request, response) => {
     response.json(Resume)
 })
@@ -23,6 +29,7 @@ app.use('/language', require('./routes/Languages').languages)
 app.use('/interest', require('./routes/Interests').interests)
 app.use('/reference', require('./routes/References').references)
 
-app.listen(5001, '0.0.0.0', () => {
+// Starting server
+app.listen(PORT, '0.0.0.0', () => {
     console.log("inicie correctamente")
 })

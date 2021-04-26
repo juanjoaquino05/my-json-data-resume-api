@@ -36,9 +36,6 @@ publications.put('/:name', (request, response) => {
     }
 
     let elementExist = Resume.publications.some((element) =>{
-        console.log(element.name.toLowerCase())
-        console.log(element.name.toLowerCase())
-        
         return element.name.toLowerCase() === request.params.name.toLowerCase()
     })
 
